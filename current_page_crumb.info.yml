@@ -1,6 +1,6 @@
 name: 'Current Page Crumb'
-description: 'Adds the current page to the breadcrumbs.'
+description: 'Add the current page to the breadcrumb.'
 core: 8.x
-version: 8.x-1.0
+version: 8.x-1.0-beta1
 project: current_page_crumb
 type: module
