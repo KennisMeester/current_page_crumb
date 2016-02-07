@@ -1,0 +1,32 @@
+<?php
+/**
+ * @file
+ * Add the current page to the breadcrumb.
+ */
+namespace Drupal\current_page_crumb;
+
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Link;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+
+/**
+ *  Implements hook_system_breadcrumb_alter().
+ *
+ *  Add the current page title to the breadcrumbs built by the BreadcrumbManager.
+ */
+//function current_page_crumb_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+function current_page_crumb_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+
+  drupal_set_message('hello world');
+  // Append the current page title to the breadcrumb for non-admin routes.
+  if ($breadcrumb && !\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $request = \Drupal::request();
+    if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
+      $title = \Drupal::service('title_resolver')->getTitle($request, $route);
+    }
+    if (!empty($title)) {
+      $breadcrumb->addLink(Link::createFromRoute($title, '<none>'));
+    }
+  }
+}
