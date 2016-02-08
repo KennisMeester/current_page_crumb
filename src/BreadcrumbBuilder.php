@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\current_page_crumb\BreadcrumbBuilder.
+ */
+
 namespace Drupal\current_page_crumb;
 
 use Drupal\Core\Link;
@@ -9,6 +14,11 @@ use Drupal\system\PathBasedBreadcrumbBuilder;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
+ * Adds the current page title to the breadcrumb.
+ *
+ * Extend PathBased Breadcrumbs to include the current page title as an unlinked crumb.
+ * The module uses the path if the title is unavailable and it excludes all admin paths.
+ *
  * {@inheritdoc}
  */
 class BreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
